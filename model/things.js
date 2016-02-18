@@ -1,17 +1,13 @@
-Things = new Mongo.Collection('things');
+InMind = new Mongo.Collection('inmind');
 
-Things.allow({
+InMind.allow({
   insert: function(userId, thing) {
-    thing.createdAt = new Date();
-    thing.name_sort = thing.name.toLowerCase();
-    return true;
+    return false;
   },
   update: function(userId, thing, fields, modifier) {
-    thing.createdAt = new Date();
-    thing.name_sort = thing.name.toLowerCase();
-    return true;
+    return false;
   },
   remove: function(userId, thing) {
-    return true;
+    return false;
   }
 });

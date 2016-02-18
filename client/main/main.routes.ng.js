@@ -6,6 +6,7 @@ angular.module('sumanKoBasicSpaceApp')
   .state('main', {
     url: '/',
     templateUrl: 'client/main/main.view.html',
-    controller: 'MainCtrl'
+    controller: 'MainCtrl',
+    controllerAs: 'mc'
   });
 });
