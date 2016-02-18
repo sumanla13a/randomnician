@@ -1,0 +1,7 @@
+.meteor/local
+.meteor/meteorite
+.log
+node_modules
+dist
+brackets.json
+.idea/
