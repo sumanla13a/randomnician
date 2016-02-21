@@ -5,6 +5,7 @@ angular.module('sumanKoBasicSpaceApp')
   return {
     restrict: 'AE',
     templateUrl: 'client/components/toolbar/toolbar.view.html',
+    controller: 'NavbarCtrl',
     replace: true
   };
 });

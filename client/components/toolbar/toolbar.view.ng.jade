@@ -1,7 +1,15 @@
 md-toolbar.toolbar(layout='row', layout-align='start center', layout-padding='')
   .navbar-left(layout='row', layout-align='center center')
     login-buttons(name='loginButtons')
+    md-button(ng-href="/") Posts
     md-button(ng-href='/about') About
   span(flex='')
   .navbar-right 
-    a(href='/') sumanKoBasicSpaceApp
+    
+    md-menu(ng-if="userLoggedIn")
+      // Trigger element is a md-button with an icon
+      md-button.md-icon-button(ng-click='$mdOpenMenu($event)', aria-label='Open sample menu')
+        button(type="button" ng-click="notificationWatched();") {{notificationCount.count}}
+      md-menu-content
+        md-menu-item(ng-repeat="notification in notifications" style="border-bottom: 1px solid grey") 
+          a(href="/post/{{notification.notificationOf}}" style="color: inherit; text-decoration: none;") One new comment on {{notification.message}}

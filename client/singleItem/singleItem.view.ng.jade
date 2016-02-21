@@ -1,0 +1,8 @@
+.main(layout='row')
+  .grid-content 
+    form.md-whiteframe-z1(ng-submit='si.addComment(si.selectedPost._id)', name='si.post', novalidate='', layout-padding='').md-whiteframe-z1
+      p {{ si.selectedPost.thingInMind }}
+      p(ng-repeat="reply in si.selectedPost.reply") {{reply.message}}
+      md-input-container(ng-if="si.userLoggedIn")         
+        input(type="text", ng-model="si['reply']", placeholder="Reply Something")
+      input.md-button(type='submit', value='Add' ng-if="si.userLoggedIn")

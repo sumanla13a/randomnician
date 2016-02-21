@@ -1,7 +1,7 @@
 .main(layout='row')
   .grid-content
     div.grid-container(layout='column')
-      form.md-whiteframe-z1(ng-submit='mc.save()', name='form', novalidate='', layout-padding='')
+      form.md-whiteframe-z1(ng-submit='mc.save()', name='mc.form', novalidate='', layout-padding='' ng-if="mc.userLoggedIn")
         md-input-container
           input.post(ng-model='mc.newpost', placeholder="What's on your mind?")
         input.md-button(type='submit', value='Add')
@@ -10,6 +10,6 @@
       form.md-whiteframe-z1(ng-submit='mc.addComment($index, post._id)', name='mc.post{{$index}}', novalidate='', layout-padding='' ng-repeat='post in mc.posts').md-whiteframe-z1
           p {{ post.thingInMind }}
           p(ng-repeat="reply in post.reply") {{reply.message}}
-          md-input-container          
+          md-input-container(ng-if="mc.userLoggedIn")
             input(type="text", ng-model="mc['reply'+$index]", placeholder="Reply Something")
-          input.md-button(type='submit', value='Add')      
+          input.md-button(type='submit', value='Add' ng-if="mc.userLoggedIn")      

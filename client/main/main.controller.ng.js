@@ -4,16 +4,13 @@
   angular.module('sumanKoBasicSpaceApp')
   .controller('MainCtrl', ['$scope', '$meteor', function($scope, $meteor) {
     var mainvm = this;
-    
+    mainvm.userLoggedIn = Meteor.userId() ? true : false;
+    // console.log(Meteor.userId());
     
     $meteor.autorun($scope, function() {
-      $scope.$meteorSubscribe('inmind', {
-        // limit: parseInt($scope.getReactively('perPage')),
-        // skip: parseInt(($scope.getReactively('page') - 1) * $scope.getReactively('perPage')),
-        sort: {'createdAt': 0}
-      }).then(function() {
+      $scope.$meteorSubscribe('inmind', {}).then(function() {
         mainvm.posts = $meteor.collection(function() {
-          return InMind.find({}, {sort: {'createdAt': 1}});
+          return InMind.find({}, {sort: {'createdAt': -1}});
         });
       });
     });
@@ -21,12 +18,12 @@
     // $meteor.session('thingsCounter').bind($scope, 'page');
 
     mainvm.save = function() {
-      if($scope.form.$valid) {
+      if(mainvm.form.$valid) {
         var newPost = {
           message: mainvm.newpost
         };
         Meteor.call('addNew', newPost, function(err, response) {
-          mainvm.newPost = '';
+          mainvm.newpost = "";
         })
       }
     };
@@ -40,7 +37,7 @@
         };
         console.log(newComment);
         Meteor.call('addReply', newComment, function(err, response) {
-          // mainvm.newPost = '';
+          delete mainvm['reply'+$index];
         })
       }
     }

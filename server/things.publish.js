@@ -7,7 +7,10 @@ Meteor.publish('inmind', function(options, searchString) {
       '$options': 'i'
     }
   };
+  if(!options) {
+    options = {};
+  }
+
   // Counts.publish(this, 'numberOfThings', InMind.find(where, {fields: {'user': 0}}), {noReady: true});
-  console.log(InMind.find({}, {fields: {'user': 0}}).fetch());
-  return InMind.find({}, {fields: {'user': 0, 'reply.by': 0}});
+  return InMind.find(options, {fields: {'user': 0, 'reply.by': 0}});
 });
